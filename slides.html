@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<!---->
+<head>
+	<title>Analysis of Airbnb London</title>
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> <!-- This fixes the problem of small font (some texts and also the math) in mobile devices, see https://stackoverflow.com/a/35564095/8849755 -->
+	<link rel="stylesheet" href="https://sengerm.github.io/html-academic-publishing/css_and_scripts/style.css">
+	<link rel="stylesheet" href="style.css">
+	<!-- Math support https://www.mathjax.org/#gettingstarted -->
+    <script>
+	MathJax = {
+	  tex: {
+		inlineMath: [['$', '$'], ['\\(', '\\)']]
+	  },
+	  svg: {
+		fontCache: 'global'
+	  }
+	};
+	</script>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+
+<div id="document_title"></div>
+
+<author>Matías Senger</author>
+
+<div style="display: block; margin: 33px auto; text-align: center;">July 2021</div>
+
+<abstract>This brief analysis of AirBnB data was made in the context of a recruitment process for Turing.com.</abstract>
+
+<presentation_display_block>
+
+<div id="table-of-contents">
+	<h2 class="unnumbered">Contents</h2>
+</div>
+
+</presentation_display_block>
+<presentation_display_block>
+
+<h1>Introduction</h1>
+
+<p>Airbnb is a company focused on lodging worldwide. In this report some results from its operations in London, UK, are presented. The raw data can be found in <a href="http://insideairbnb.com/get-the-data.html">this link</a>. This data contains information on the different listings in London, as well as all the guests reviews from 2010 up to the present.</p>
+
+</presentation_display_block>
+<presentation_display_block>
+
+<h1>Objective</h1>
+
+<p>I focused the analysis in:
+	<ul>
+		<li>Finding which neighborhoods are more profitable.</li>
+		<li>See if there is some tendency for this to change in time.</li>
+		<li>Can the business still expand?</li>
+	</ul>
+</p>
+
+</presentation_display_block>
+<presentation_display_block>
+
+<h1>Results</h1>
+
+<ul class="spaced">
+	<li>Ideal information: Occupancy rate of each listing.</li>
+	<li>It is not available. &#128543;</li>
+	<li>We do have the <em>number of reviews per month</em> for each listing.</li>
+	<li>Can we exploit the (reasonable) correlation between them? This can be dangerous because:
+	<ul>
+		<li>Listings with $\approx 30 \frac{\text{reviews}}{\text{month}}$ obviously have high occupancy rate. &#9989; (Relation almost deterministic.)</li>
+		<li>Smaller values have big uncertainties! Is it small because it is not occupied or because it is occupied for long periods?</li>
+	</ul>
+	</li>
+</ul>
+
+</presentation_display_block>
+<presentation_display_block>
+
+<p>Furthermore, most listings have $ \lesssim 4 \frac{\text{reviews}}{\text{month}}$:</p>
+
+<image src="media/price_vs_reviews_per_month.png" style="max-width: 555px; width: 100%;"></image>
+
+<p>Because of this I avoided estimating any kind of revenue per listing.</p>
+
+</presentation_display_block>
+<presentation_display_block>
+
+<p>We can sort the neighborhoods by reviews per month and plot them to get a visual idea of the orders of magnitude:</p>
+
+<iframe src="media/reviews_per_month.html" class="plotly"></iframe>
+
+<p>Top neighborhood is <em>Westminster</em>, almost twice as next ones.</p>
+
+</presentation_display_block>
+<presentation_display_block>
+
+<p>How efficient is each neighborhood? Normalize the reviews per month by the number of listings:</p>
+
+<iframe src="media/neighbourhoods.html" class="plotly"></iframe>
+
+<ul class="spaced">
+	<li>Westminster among the most efficients, also among highest rates.</li>
+	<li>Hillingdon is the most efficient under this definition.</li>
+</ul>
+
+</presentation_display_block>
+<presentation_display_block>
+
+<p>Evolution in time? Casually Hillingdon seems to be growing at a higher rate than the others:</p>
+
+<iframe src="media/reviews_vs_year.html" class="plotly"></iframe>
+
+<ul class="spaced">
+	<li>The number of reviews per year in all the neighborhoods seems to keep growing "almost" exponentially each year.</li>
+	<li>The effect of the COVID-19 pandemic is visible: 2020 was at the level of 2016.</li>
+</ul>
+
+</presentation_display_block>
+<presentation_display_block>
+
+<h1>Conclusions</h1>
+
+<ul class="spaced">
+	<li>An overview of the activity of Airbnb in London was presented.</li>
+	<li>The top neighborhoods in terms of number of reviews per month were identified.</li>
+	<li>A simple criterion for efficiency of each neighborhood was defined.</li>
+	<li>Despite all the neighborhoods seem to grow at a similar rate, Hillingdon shows a higher rate which could be somehow exploited (marketing?).</li>
+	<li>The number of reviews per year was growing "almost exponentially" before the pandemic, there is still room to expand the business.</li>
+</ul>
+
+<!--
+<div id="references_list">
+	<h1 class="unnumbered">References</h1>
+	<reference id="Reference: _____">Bla bla bla.</reference>
+</div>
+-->
+
+<!--
+<div id="footnotes_list">
+	<h1 class="unnumbered">Footnotes</h2>
+</div>
+-->
+
+<script src="https://sengerm.github.io/html-academic-publishing/css_and_scripts/script.js"></script>
+<script src="https://sengerm.github.io/html-academic-publishing/css_and_scripts/authors.js"></script>
+
+<!-- Presentation display blocks -->
+<script src="https://sengerm.github.io/html-academic-publishing/css_and_scripts/presentation_display_block/presentation_display_block.js"></script>
+<link rel="stylesheet" href="https://sengerm.github.io/html-academic-publishing/css_and_scripts/presentation_display_block/presentation_display_block.css">
+</body>
+
+</html>
